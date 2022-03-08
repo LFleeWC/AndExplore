@@ -98,9 +98,9 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
             (env)->FindClass("android/content/pm/PackageInfo"));
 
 
-    if (!checkSign(env, getApplicationContext(env))) {
-        return -1;
-    }
+//    if (!checkSign(env, getApplicationContext(env))) {
+//        return -1;
+//    }
 
     //if (checkXposed(env)) {
     //    return -1;

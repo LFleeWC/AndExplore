@@ -58,21 +58,21 @@
 			android:id="@+id/view_apk_Button_view"/>
 
 		<Button
-			android:layout_width="match_parent"
-			style="?android:attr/buttonBarButtonStyle"
-			android:layout_height="wrap_content"
-			android:text="安装"
-			android:layout_weight="1.0"
-			android:id="@+id/view_apk_Button_install"/>
-
-        <Button
             android:layout_width="match_parent"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_height="wrap_content"
             android:text="属性"
             android:layout_weight="1.0"
             android:id="@+id/view_apk_Button_property"/>
-        
+
+		<Button
+			android:id="@+id/view_apk_Button_install"
+			style="?android:attr/buttonBarButtonStyle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_weight="1.0"
+			android:text="安装" />
+
 		<Button
 			android:layout_width="match_parent"
 			style="?android:attr/buttonBarButtonStyle"

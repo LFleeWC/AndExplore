@@ -154,7 +154,9 @@ public class view_apk
                                     case R.id.action_apk_conexist:
                                         new makeConexist(context,window,path);
                                         break;
-
+                                    case R.id.action_apk_deString:
+                                        new deApkString(context,window,path);
+                                        break;
                                     default:
                                         break;
                                 }

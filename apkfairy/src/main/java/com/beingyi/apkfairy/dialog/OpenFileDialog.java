@@ -206,7 +206,7 @@ public class OpenFileDialog {
             list.addAll(lfiles);    //再添加文件  
 
 
-            SimpleAdapter adapter = new SimpleAdapter(getContext(), list, R.layout.item_file, new String[]{"img", "name", "path"}, new int[]{R.id.filedialogitem_img, R.id.filedialogitem_name, R.id.filedialogitem_path});  
+            SimpleAdapter adapter = new SimpleAdapter(getContext(), list, R.layout. item_file, new String[]{"img", "name", "path"}, new int[]{R.id.filedialogitem_img, R.id.filedialogitem_name, R.id.filedialogitem_path});  
             this.setAdapter(adapter);  
             return files.length;  
         }  

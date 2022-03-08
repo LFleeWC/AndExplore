@@ -31,6 +31,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 
 import com.beingyi.app.AE.R;
+import com.beingyi.app.AE.utils.FileUtils;
 import com.google.common.collect.Lists;
 
 import android.graphics.Color;
@@ -133,6 +134,7 @@ public class MainActivity extends BaseActivity {
         toolbar.setTitleTextAppearance(context, R.style.Toolbar_TitleText);
         toolbar.setSubtitleTextAppearance(context, R.style.Toolbar_SubTitleText);
         toolbar.setSubtitle("");
+
         toolbar.setOnLongClickListener(new OnLongClickListener() {
 
             @Override

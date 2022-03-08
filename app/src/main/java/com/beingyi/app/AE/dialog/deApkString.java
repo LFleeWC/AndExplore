@@ -4,13 +4,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.View;
-import android.widget.EditText;
 
 import com.beingyi.app.AE.R;
 import com.beingyi.app.AE.interfaces.GetSavePathCallBack;
 import com.beingyi.app.AE.ui.AlertProgress;
 import com.beingyi.app.AE.ui.SPEditText;
 import com.beingyi.app.AE.utils.ApkStringEncryptor;
+import com.beingyi.app.AE.utils.ApkStringdecryption;
 import com.beingyi.app.AE.utils.DexStringEncryptor;
 import com.beingyi.app.AE.utils.FileUtils;
 
@@ -18,27 +18,35 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class enApkString extends baseDialog {
+/**
+ * @ClassName com.beingyi.app.AE.dialog
+ * @Description
+ * @Author xiaoping
+ * @Date 2022/03/01
+ * @Version 1.0
+ */
+public class deApkString extends baseDialog {
 
     AlertDialog dialog;
-//加密字符串
-    public enApkString(Context mContext, int mWindow, String mPath) {
+    //解密字符串
+    public deApkString(Context mContext, int mWindow, String mPath) {
         super(mContext, mWindow, mPath);
 
-        View view=View.inflate(context,R.layout.view_enstr_conf,null);
+        View view=View.inflate(context, R.layout.view_destr_conf,null);
 
         String mkeep="android.support\njavax\nandroid.app\ncom.jsdroid.antlr";
 
-        SPEditText ed_keep=view.findViewById(R.id.view_enstr_conf_EditText_keep);
+        SPEditText ed_keep=view.findViewById(R.id.view_destr_conf_EditText_keep);
         ed_keep.setHistory(this.getClass().getSimpleName()+"keep");
         ed_keep.setHint(mkeep);
 
         if(ed_keep.getText().toString().isEmpty()){
             ed_keep.setText(mkeep);
         }
+        SPEditText ed_decode=view.findViewById(R.id.view_destr_conf_EditText_decode);
 
         dialog = new AlertDialog.Builder(context)
-                .setTitle("apk字符串加密")
+                .setTitle("apk字符串解密")
                 .setView(view)
                 .setCancelable(false)
                 .setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -53,9 +61,10 @@ public class enApkString extends baseDialog {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
 
-                        String keep=ed_keep.getText().toString();
+                        String keep=ed_keep.getText().toString();//忽略类
+                        String decodeM=ed_decode.getText().toString(); //解密方法
 
-                        final File outFile = new File(new File(Path).getParent(), FileUtils.getPrefix(Path) + "_enStr.apk");
+                        final File outFile = new File(new File(Path).getParent(), FileUtils.getPrefix(Path) + "_deStr.apk");
 
                         new getSavePath(context, window, outFile.getAbsolutePath(), new GetSavePathCallBack() {
 
@@ -73,9 +82,9 @@ public class enApkString extends baseDialog {
                                             keeps.add(k);
                                         }
                                     }
-                                    encryptString(filePath,keeps);
+                                    decryptString(filePath,keeps,decodeM);
                                 }else{
-                                    encryptString(filePath,null);
+                                    decryptString(filePath,null,decodeM);
                                 }
                             }
 
@@ -95,8 +104,8 @@ public class enApkString extends baseDialog {
 
 
 
-//加密字符串，路径，忽略类
-    public void encryptString(final String outPath, List<String> keeps) {
+    //加密字符串，(路径，忽略类,解密方法)
+    public void decryptString(final String outPath, List<String> keeps,String decodeM) {
 
 
         final AlertProgress progres = new AlertProgress(context);
@@ -107,7 +116,7 @@ public class enApkString extends baseDialog {
                 progres.show();
                 try {
 
-                    ApkStringEncryptor apkStringEncryptor=new ApkStringEncryptor(Path, outPath, keeps, new DexStringEncryptor.EncryptCallBack() {
+                    ApkStringdecryption apkStringdecryption=new ApkStringdecryption(Path, outPath, keeps,decodeM, new DexStringEncryptor.EncryptCallBack() {
                         @Override
                         public void onProgress(int progress, int total) {
                             progres.setProgress(progress, total);
@@ -130,7 +139,7 @@ public class enApkString extends baseDialog {
                         }
                     });
 
-                    apkStringEncryptor.start();
+                    apkStringdecryption.start();
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {

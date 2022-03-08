@@ -6,6 +6,7 @@ import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.beingyi.app.AE.dialog.deApkString;
 import com.beingyi.app.AE.dialog.enDexString;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
@@ -179,7 +180,9 @@ public class s_dex extends s_base {
                     case R.id.action_dex_enString:
                         new enDexString(context, window, Path);
                         break;
-
+                    case R.id.action_dex_deString:
+                        new deApkString(context,window,Path);
+                        break;
 
                 }
 

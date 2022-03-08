@@ -85,7 +85,7 @@ public class DexStringEncryptor {
 
         for (int i = 0; i < baseClassDefs.size(); i++) {
             try {
-                dexBuilder.internClassDef(baseClassDefs.get(i));
+                dexBuilder.internClassDef(baseClassDefs.get(i));   //将EncrtptString.dex文件植入dexBuilder中
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -95,7 +95,7 @@ public class DexStringEncryptor {
         List<ClassDef> classDefs = Lists.newArrayList(dex.getClasses());
 
         for (int i = 0; i < classDefs.size(); i++) {
-            dealClassDef(dexBuilder, classDefs.get(i));
+            dealClassDef(dexBuilder, classDefs.get(i));//处理dex中的class
             callBack.onProgress(i, classDefs.size());
 
         }
@@ -103,7 +103,7 @@ public class DexStringEncryptor {
 
         MemoryDataStore memoryDataStore = new MemoryDataStore();
         dexBuilder.writeTo(memoryDataStore);
-        out = Arrays.copyOf(memoryDataStore.getBufferData(), memoryDataStore.getSize());
+        out = Arrays.copyOf(memoryDataStore.getBufferData(), memoryDataStore.getSize());//内存拷贝到byte
 
 
         System.out.println("dex加密完成");
@@ -117,7 +117,7 @@ public class DexStringEncryptor {
         callBack.onClassDefName(type);
 
         boolean isKeep = false;
-        for (int l = 0; l < keeps.size(); l++) {
+        for (int l = 0; l < keeps.size(); l++) {   //处理的类是否为忽略的类
             if (type.startsWith(keeps.get(l))) {
                 isKeep = true;
                 break;
@@ -134,7 +134,7 @@ public class DexStringEncryptor {
             smali = dealSmali1(smali);
             smali = dealSmali2(smali);
             try {
-                Smali.assembleSmaliFile(smali, dexBuilder, new SmaliOptions());
+                Smali.assembleSmaliFile(smali, dexBuilder, new SmaliOptions()); //smali存入dexBuilder
                 //dexBuilder.internClassDef(classDef);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -168,7 +168,7 @@ public class DexStringEncryptor {
         FileUtils.saveFile(out, destPath);
     }
 
-
+//处理smali文件中的字符串
     public String dealSmali1(String smali) {
 
         List<String> codes = new ArrayList<>();

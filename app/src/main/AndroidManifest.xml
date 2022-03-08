@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.beingyi.app.AE">
 
     
@@ -68,7 +69,8 @@
         <activity
             android:name="zhao.arsceditor.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"
+            tools:ignore="MissingClass" />
 
 
         <activity

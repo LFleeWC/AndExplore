@@ -24,6 +24,15 @@ public class ApkStringEncryptor
     DexStringEncryptor.EncryptCallBack callBack;
     UICallBack uiCallBack;
 
+    /**
+     * Instantiates a new Apk string encryptor.
+     *
+     * @param input       apk路径
+     * @param output      输出路径
+     * @param keeps       the keeps
+     * @param mCallBack   the m call back
+     * @param mUICallBack the m ui call back
+     */
     public ApkStringEncryptor(String input, String output, List<String> keeps, DexStringEncryptor.EncryptCallBack mCallBack,UICallBack mUICallBack)
     {
         this.Input = input;
@@ -32,7 +41,8 @@ public class ApkStringEncryptor
         this.callBack = mCallBack;
         this.uiCallBack=mUICallBack;
 
-
+//Ctrl + Shift+/  /* */
+        //Shift + Alt + g javadoc
     }
 
 
@@ -52,10 +62,10 @@ public class ApkStringEncryptor
             InputStream inputStream = zipFile.getInputStream(zipFile.getEntry(dexName));
             ByteArrayOutputStream baos = FileUtils.cloneInputStream(inputStream);
 
-
+            //处理class.dex
             DexStringEncryptor dexStringEncryptor=new DexStringEncryptor(baos.toByteArray(), keeps, callBack);
             dexStringEncryptor.start();
-            ZipOutUtil.AddFile(zos, dexName,dexStringEncryptor.getOutData());
+            ZipOutUtil.AddFile(zos, dexName,dexStringEncryptor.getOutData());//将byte[] dexStringEncryptor.getOutData() 写入zos中
 
         }
         
@@ -65,7 +75,7 @@ public class ApkStringEncryptor
         }
 
         uiCallBack.onStep("正在保存资源");
-        ZipOutUtil.Sava(zipFile, zos, dexList, new ZipOutUtil.ZipSavsCallback(){
+        ZipOutUtil.Sava(zipFile, zos, dexList, new ZipOutUtil.ZipSavsCallback(){  //保存为apk
 
                 @Override
                 public void onStep(ZipOutUtil.Step step)
@@ -85,9 +95,9 @@ public class ApkStringEncryptor
 
     }
 
-
-
-
+/**
+ * 解析apk,将内容列表拷贝到map中，dex添加到dexList中
+*/
     private void readZip(ZipFile zip, Map<String, byte[]> map) throws Exception
     {
         Enumeration enums = zip.entries();

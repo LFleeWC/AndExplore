@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 30
     buildToolsVersion '28.0.3'
 
     defaultConfig {
@@ -17,10 +17,10 @@ android {
 
     signingConfigs {
         signConfig {
-            storeFile file('E:\\MyData\\AndroidProjects\\beingyi.jks')
-            storePassword ""
-            keyAlias "beingyi"
-            keyPassword ""
+            storeFile file('H:\\app_tools\\lxp.jks')
+            storePassword "xiaoping123"
+            keyAlias "android"
+            keyPassword "xiaoping123"
         }
     }
 
@@ -114,7 +114,8 @@ dependencies {
 
     //implementation 'org.mockito:mockito-all:1.8.4'
 
-
+    //gson
+    implementation 'com.google.code.gson:gson:2.8.6'
 }
 
 
